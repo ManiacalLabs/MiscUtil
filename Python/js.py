@@ -13,11 +13,11 @@ class jsdict(dict):
         #recurses through list and dict types, converting to jsdict
         for k in self.__dict__:
             if isinstance(self.__dict__[k], dict):
-                self.__dict__[k] = d(self.__dict__[k])
+                self.__dict__[k] = jsdict(self.__dict__[k])
             elif isinstance(self.__dict__[k], list):
                 for i in range(len(self.__dict__[k])):
                     if isinstance(self.__dict__[k][i], dict):
-                        self.__dict__[k][i] = d(self.__dict__[k][i])
+                        self.__dict__[k][i] = jsdict(self.__dict__[k][i])
 
     #Undefined keys now return None instead of throwing exception
     def __getattr__(self, name):
